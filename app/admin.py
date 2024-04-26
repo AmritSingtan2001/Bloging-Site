@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Tag, Blog
+from .models import Category, Tag, Blog,Comment
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
@@ -11,7 +11,12 @@ class TagAdmin(admin.ModelAdmin):
 
 admin.site.register(Tag, TagAdmin)
 
+
+class CommentAdmin(admin.TabularInline):
+    model = Comment
+
 class BlogAdmin(admin.ModelAdmin):
+    inlines =[CommentAdmin]
     list_display = ['title', 'author', 'creation_date', 'category_display']
 
     def category_display(self, obj):
