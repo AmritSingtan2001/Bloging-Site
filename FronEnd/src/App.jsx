@@ -5,20 +5,24 @@ import Register from './components/header/register'
 import BlogDetail from './components/header/blogDetail'
 import Header from './components/header/Header';
 import Home from './components/Home';
-
+import Footer from './components/Footer';
+import BlogPostForm from './components/header/blogPostForm';
 
 const App = () => {
   return (
     <div className="">
       <div className="">
-      <Header />
-      <Routes>
+        <Header />
+        
+        <Routes>
       
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/blog/details/:id" element={<BlogDetail />} />
-          </Routes>
+          <Route path="/create-post" element={<BlogPostForm/>}/>
+        </Routes>
+        <Footer/>
       </div>
     </div>
 
