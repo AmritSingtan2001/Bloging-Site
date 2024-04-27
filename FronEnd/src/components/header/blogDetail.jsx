@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { FaLock } from 'react-icons/fa';
 
 const BlogDetail = () => {
   const { id } = useParams(); 
@@ -10,6 +11,7 @@ const BlogDetail = () => {
   const [error, setError] = useState(null);
   const user = JSON.parse(sessionStorage.getItem('user')); 
   const token = sessionStorage.getItem('token');
+  
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -94,9 +96,19 @@ const BlogDetail = () => {
               placeholder="Add a comment..."
               className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4"
             />
-            <button type="submit" className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700">
-              Post Comment
-            </button>
+         <button
+        type="submit"
+        className={`bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 ${!token ? 'disabled' : ''}`}
+        disabled={!token} // Disable button if token is not available
+      >
+        {token ? (
+          'Post Comment'
+        ) : (
+          <>
+            <FaLock className="inline mr-2" /> Please login to Comment
+          </>
+        )}
+      </button>
           </form>
 
           <ul className="mt-4 space-y-4">
