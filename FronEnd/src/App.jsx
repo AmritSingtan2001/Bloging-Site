@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/all-blogs" element={<BlogTable/>}/>
 
         </Routes>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     </div>
 
