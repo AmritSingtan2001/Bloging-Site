@@ -8,7 +8,7 @@ const BlogDetail = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [error, setError] = useState(null);
-  const user = JSON.parse(sessionStorage.getItem('user')); // Parse the stored user object
+  const user = JSON.parse(sessionStorage.getItem('user')); 
   const token = sessionStorage.getItem('token');
 
   const formatDate = (dateString) => {
