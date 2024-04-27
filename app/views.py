@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Category, Tag, Blog, Comment
-from .serializers import CategorySerializer, TagSerializer, BlogSerializer, CommentSerializer
+from .serializers import CategorySerializer, TagSerializer, BlogSerializer, CommentSerializer,BlogCreateSerializers
 from rest_framework.permissions import IsAdminUser,IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -86,21 +86,34 @@ class BlogListAPIView(generics.ListAPIView):
     serializer_class = BlogSerializer
 
 class BlogCreateAPIView(generics.CreateAPIView):
-    queryset =Blog.objects.all()
-    serializer_class= BlogSerializer
-    permission_classes =[IsAuthenticated]
+    queryset = Blog.objects.all()
+    serializer_class = BlogCreateSerializers
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-        response= super().post(request, *args, **kwargs)
-        response.data['message']="Blog Created successfully"
-        response.data['success']=True
-        response.status_code = status.HTTP_201_CREATED
-        return response
+        data = request.data 
+        data['author'] = request.user.id
+        serializer = self.get_serializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            response_data = {
+                'message': 'Blog Created successfully!',
+                'success': True,
+                'data': serializer.data
+            }
+            return Response(response_data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class BlogDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class BlogDetailView(generics.RetrieveAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
-    # permission_classes =[IsAuthenticated]
+
+
+class BlogUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogCreateSerializers
+    permission_classes =[IsAuthenticated]
 
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
