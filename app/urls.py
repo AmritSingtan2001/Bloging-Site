@@ -3,7 +3,7 @@ from .views import (
     CategoryListAPIView,CategoryCreateAPIView, CategoryDetailAPIView,
     TagListAPIView, TagDetailAPIView,TagCreateAPIView,
     BlogListAPIView, BlogDetailAPIView,BlogCreateAPIView,
-    CommentListAPIView, CommentCreateAPIView,
+    CommentListAPIView, CommentCreateAPIView,BlogCommentsListAPIView
 )
 
 urlpatterns = [
@@ -15,6 +15,7 @@ urlpatterns = [
     path('tags/<int:pk>/', TagDetailAPIView.as_view(), name='tag-detail'),
     path('blogs/', BlogListAPIView.as_view(), name='blog-list'),
     path('blogs/add/', BlogCreateAPIView.as_view(), name='blog-add'),
+    path('blogs/<int:blog_id>/comments/',BlogCommentsListAPIView.as_view(), name='blog-related-comments'),
     path('blogs/<int:pk>/', BlogDetailAPIView.as_view(), name='blog-detail'),
     path('comments/', CommentListAPIView.as_view(), name='comment-list'),
     path('comments/create/', CommentCreateAPIView.as_view(), name='comment-create'),
