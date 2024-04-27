@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     CategoryListAPIView,CategoryCreateAPIView, CategoryDetailAPIView,
     TagListAPIView, TagDetailAPIView,TagCreateAPIView,
-    BlogListAPIView, BlogDetailAPIView,BlogCreateAPIView,
+    BlogListAPIView, BlogDetailAPIView,BlogCreateAPIView,UserRelatedBlogListView,
     CommentListAPIView, CommentCreateAPIView,BlogCommentsListAPIView
 )
 
@@ -17,6 +17,7 @@ urlpatterns = [
     path('blogs/add/', BlogCreateAPIView.as_view(), name='blog-add'),
     path('blogs/<int:blog_id>/comments/',BlogCommentsListAPIView.as_view(), name='blog-related-comments'),
     path('blogs/<int:pk>/', BlogDetailAPIView.as_view(), name='blog-detail'),
+    path('user/blog', UserRelatedBlogListView.as_view(), name='user_related_blog'),
     path('comments/', CommentListAPIView.as_view(), name='comment-list'),
     path('comments/create/', CommentCreateAPIView.as_view(), name='comment-create'),
 ]

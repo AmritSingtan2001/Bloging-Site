@@ -117,6 +117,19 @@ class BlogDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         return Response({"message":"Blog deleted successfully!!"})
 
 
+'''user rleated blog list'''
+class UserRelatedBlogListView(generics.ListAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset= Blog.objects.filter(author = self.request.user)
+        return queryset
+
+
+
+
 class CommentListAPIView(generics.ListAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
