@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 const BlogCard = () => {
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [blogsPerPage] = useState(6); // Number of blogs to show per page
-
+  const [blogsPerPage] = useState(6); 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString(); 
@@ -25,7 +24,6 @@ const BlogCard = () => {
     fetchBlogs();
   }, []);
 
-  // Logic to get current blogs for pagination
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentBlogs = blogs.slice(indexOfFirstBlog, indexOfLastBlog);

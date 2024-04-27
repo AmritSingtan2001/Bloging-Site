@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Category, Tag, Blog, Comment
-from .serializers import CategorySerializer, TagSerializer, BlogSerializer, CommentSerializer
+from .serializers import CategorySerializer, TagSerializer, BlogSerializer, CommentSerializer,BlogCreateSerializers
 from rest_framework.permissions import IsAdminUser,IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -87,7 +87,7 @@ class BlogListAPIView(generics.ListAPIView):
 
 class BlogCreateAPIView(generics.CreateAPIView):
     queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
+    serializer_class = BlogCreateSerializers
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
@@ -112,7 +112,7 @@ class BlogDetailView(generics.RetrieveAPIView):
 
 class BlogUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
+    serializer_class = BlogCreateSerializers
     permission_classes =[IsAuthenticated]
 
     def retrieve(self, request, *args, **kwargs):
