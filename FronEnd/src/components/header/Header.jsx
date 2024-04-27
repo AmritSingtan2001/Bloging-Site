@@ -41,6 +41,14 @@ const Header = () => {
                   <ul className="absolute right-0 bg-gray-800 w-52 text-white py-2 rounded-md shadow-lg">
                     <li>
                       <Link
+                        to="/all-blogs"
+                        className="block  w-full px-4 py-2 hover:bg-gray-700"
+                      >
+                        Your Blog
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
                         to="/create-post"
                         className="block  w-full px-4 py-2 hover:bg-gray-700"
                       >

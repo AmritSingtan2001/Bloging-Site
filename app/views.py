@@ -125,6 +125,7 @@ class UserRelatedBlogListView(generics.ListAPIView):
 
     def get_queryset(self):
         queryset= Blog.objects.filter(author = self.request.user)
+        print(queryset)
         return queryset
 
 
